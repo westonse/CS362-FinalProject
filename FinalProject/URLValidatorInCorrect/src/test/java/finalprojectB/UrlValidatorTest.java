@@ -37,23 +37,48 @@ public class UrlValidatorTest extends TestCase {
    }
 
    
-   
+   /*
+    This function manually tests each of the 5 possible parts of a URL that would be passed to the isValid() funciton. First, there are valid URLs tested and then there are invalid URLS tested. Each of the URLs are only slightly changed to test the specific parts of the URL.
+    */
    public void testManualTest()
    {
+       System.out.println("BEGIN MANUAL TEST\n");
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-	   System.out.println(urlVal.isValid("http://www.amazon.com"));
-	   
-	   
+
+
+
+       
+
    }
    
-   
+   //valid URL partition
    public void testYourFirstPartition()
    {
-	   
+       System.out.println("BEGIN VALID PARTITION TEST\n");
+       UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+       //assertions with valid urls
+       assertTrue("TESTING VALID SCHEME",urlVal.isValid("h3t://www.google.com/"));
+       assertTrue("TESTING VALID AUTHORITY",urlVal.isValid("http://amazon.com"));
+       
+       assertTrue("TESTING VALID PORT",urlVal.isValid("http://www.google.com:80")); // change port --> bug found at line 157/158 with PORT_REGEX variable
+       assertTrue("TESTING VALID PATH",urlVal.isValid("http://www.google.com:80/test1"));
+       assertTrue("TESTING VALID PATH OPTIONS",urlVal.isValid("http://www.google.com:80/test1/test1"));
+       assertTrue("TESTING VALID QUERY",urlVal.isValid("http://www.google.com:80/test1/test1?action=view")); // change query --> bug found at line 445
    }
-   
+   //invalid URL partition
    public void testYourSecondPartition(){
-	   
+       
+       System.out.println("BEGIN INVALID PARTITION TEST\n");
+       UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+       //assertions with invalid urls
+       assertFalse("TESTING INVALID SCHEME",urlVal.isValid("3ht://www.google.com/"));
+       assertFalse("TESTING INVALID AUTHORITY",urlVal.isValid("http://aaa."));
+       
+       assertFalse("TESTING INVALID PORT",urlVal.isValid("http://www.google.com:1111212121")); // change to invalid port --> bug found at line 157/158 with PORT_REGEX variable
+       assertFalse("TESTING INVALID PATH",urlVal.isValid("http://www.google.com:80/.."));
+       assertFalse("TESTING INVALID PATH OPTIONS",urlVal.isValid("http://www.google.com:80/../../file"));
+       assertFalse("TESTING INVALID QUERY",urlVal.isValid("http://www.google.com:80/test1/test1?action=vieww"));
+       
    }
    
    
