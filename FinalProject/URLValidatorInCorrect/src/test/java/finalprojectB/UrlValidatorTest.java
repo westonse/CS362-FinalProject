@@ -35,7 +35,7 @@ public class UrlValidatorTest extends TestCase {
 
    
    /*
-    This function manually tests each of the 5 possible parts of a URL (Scheme,authority,port,path/pathoptions, and query) that would be passed to the isValid() funciton. First, there are valid URLs tested and then there are invalid URLS tested. Each of the URLs are only slightly changed to test the specific parts of the URL.
+    This function manually tests each of the 5 possible parts of a URL (Scheme,authority,port,path/pathoptions, and query) that would be passed to the isValid() funciton. First, there are valid URLs tested and then there are invalid URLs tested. Each of the URLs are only slightly changed to test the specific parts of the URL.
     */
    public void testManualTest()
    {
@@ -156,7 +156,7 @@ public class UrlValidatorTest extends TestCase {
    }
    
     /*UNIT test
-     This test loops through the test arrays constructed in the apache code given to us in part A of the project and creates valid as well as invalid URLs by combining the arrays part by part similar to what is done in the apache testIsValid() funciton. This function specifically loops thorugh the scheme, authority, path, and path option parts of the URL because the port and query parts of the URL have been examined thoroughly in the partition tests. 
+     This test loops through the test arrays constructed in the apache code given to us in part A of the project and creates valid as well as invalid URLs by combining the arrays part by part similar to what is done in the apache testIsValid() funciton. This function specifically loops thorugh the scheme, authority, path, and path option parts of the URL because the port and query parts of the URL have been examined thoroughly in the partition tests.
      */
    
    public void testIsValid()
@@ -244,9 +244,8 @@ public class UrlValidatorTest extends TestCase {
                            thisString += pathPair.item;
                            thisString += pathOptionPair.item;
 
-                           expected = (schemePair.valid && authorityPair.valid && pathPair.valid && pathOptionPair.valid);
-                   
-                           //if(!(result = urlVal.isValid(thisString)))
+                        expected = (schemePair.valid && authorityPair.valid && pathPair.valid && pathOptionPair.valid);
+                        result = urlVal.isValid(thisString);
                             System.out.println(String.format("%-100s", thisString) + "Expected: " + expected + "\tActual: " + result);
                        
                            assertEquals(thisString, expected, result);
