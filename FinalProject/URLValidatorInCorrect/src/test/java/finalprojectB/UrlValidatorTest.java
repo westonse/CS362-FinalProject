@@ -112,8 +112,8 @@ public class UrlValidatorTest extends TestCase {
        
 
    }
-   /*QUERY partition test
-    This test loops through some possible valid query strings that can be part of a URL and tests that the isValid() method returns true with each iteration. Furthermore, this method also tests a sample of invalid query strings to ensure the isValid() method returns false for each invalid string.
+   /*UNIT test
+    This test loops through the
     */
    public void testYourSecondPartition(){
        
@@ -134,14 +134,8 @@ public class UrlValidatorTest extends TestCase {
        
        //list of valid query formats
        ResultPair[] validQueries = {
-           new ResultPair("first=Main&action=view", true),
-           new ResultPair("second=Main", true),
-           new ResultPair("third=test+field&third=third+done+%28clear%29%3F", true),
-           new ResultPair("fourth=test_under_score", true),
-           new ResultPair("fifth=test-dashes", true),
-           new ResultPair("sixth=test.dots", true),
-           new ResultPair("seventh=test*astericks", true),
-           new ResultPair("eighth=test~tildes", true),
+           new ResultPair("action=view", true),
+           new ResultPair("action=edit&mode=up", true),
            new ResultPair("", true)
        };
 
@@ -149,25 +143,117 @@ public class UrlValidatorTest extends TestCase {
        for (int j = 0; j < validQueries.length; j++) {
            ResultPair validPair = validQueries[j];
            System.out.println(String.format("%-100s", testString = "http://www.google.com/path?" + validPair.item) + "Expected: "+ validPair.valid + "\tActual: " + (result = urlVal.isValid(testString)));
-           assertEquals("http://www.google.com/" + validPair.item, validPair.valid, result);
+           assertEquals("http://www.google.com/path?" + validPair.item, validPair.valid, result);
        }
        
        
        for (int i = 0; i < invalidQueries.length; i++) {
            ResultPair invalidPair = invalidQueries[i];
            System.out.println(String.format("%-100s", testString = "http://www.google.com/path?" + invalidPair.item) + "Expected: "+ invalidPair.valid + "\tActual: " + (result = urlVal.isValid(testString)));
-           assertEquals("http://www.google.com/" + invalidPair.item, invalidPair.valid, result);
+           assertEquals("http://www.google.com/path?" + invalidPair.item, invalidPair.valid, result);
        }
        
    }
    
+    /*UNIT test
+     This test loops through the test arrays constructed in the apache code given to us in part A of the project and creates valid as well as invalid URLs by combining the arrays part by part similar to what is done in the apache testIsValid() funciton. This function specifically loops thorugh the scheme, authority, path, and path option parts of the URL because the port and query parts of the URL have been examined thoroughly in the partition tests. 
+     */
    
    public void testIsValid()
    {
-	   for(int i = 0;i<10000;i++)
-	   {
-		   
-	   }
+       UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+       String thisString = "";
+       boolean result = false;
+       boolean expect = true;
+       System.out.println("\nUnit test:");
+       ResultPair[] testUrlScheme = {new ResultPair("http://", true),
+           new ResultPair("ftp://", true),
+           new ResultPair("h3t://", true),
+           new ResultPair("3ht://", false),
+           new ResultPair("http:/", false),
+           new ResultPair("http:", false),
+           new ResultPair("http/", false),
+           new ResultPair("://", false),
+           new ResultPair("", true)};
+       
+       ResultPair[] testUrlAuthority = {new ResultPair("www.google.com", true),
+           new ResultPair("go.com", true),
+           new ResultPair("go.au", true),
+           new ResultPair("0.0.0.0", true),
+           new ResultPair("255.255.255.255", true),
+           new ResultPair("256.256.256.256", false),
+           new ResultPair("255.com", true),
+           new ResultPair("1.2.3.4.5", false),
+           new ResultPair("1.2.3.4.", false),
+           new ResultPair("1.2.3", false),
+           new ResultPair(".1.2.3.4", false),
+           new ResultPair("go.a", false),
+           new ResultPair("go.a1a", false),
+           new ResultPair("go.cc", true),
+           new ResultPair("go.1aa", false),
+           new ResultPair("aaa.", false),
+           new ResultPair(".aaa", false),
+           new ResultPair("aaa", false),
+           new ResultPair("", false)
+       };
+
+       ResultPair[] testPath = {new ResultPair("/test1", true),
+           new ResultPair("/t123", true),
+           new ResultPair("/$23", true),
+           new ResultPair("/..", false),
+           new ResultPair("/../", false),
+           new ResultPair("/test1/", true),
+           new ResultPair("", true),
+           new ResultPair("/test1/file", true),
+           new ResultPair("/..//file", false),
+           new ResultPair("/test1//file", false)
+       };
+       //Test allow2slash, noFragment
+       ResultPair[] testUrlPathOptions = {new ResultPair("/test1", true),
+           new ResultPair("/t123", true),
+           new ResultPair("/$23", true),
+           new ResultPair("/..", false),
+           new ResultPair("/../", false),
+           new ResultPair("/test1/", true),
+           new ResultPair("/#", false),
+           new ResultPair("", true),
+           new ResultPair("/test1/file", true),
+           new ResultPair("/t123/file", true),
+           new ResultPair("/$23/file", true),
+           new ResultPair("/../file", false),
+           new ResultPair("/..//file", false),
+           new ResultPair("/test1//file", true),
+           new ResultPair("/#/file", false)
+       };
+       boolean expected = true;
+       //test URL test arrays provided in part A of project. This excludes the port and the query parts of the URL path because we have examoned those in our partition tests.
+       for (int i = 0; i < testUrlScheme.length; i++) {
+           for (int j = 0; j < testUrlAuthority.length; j++) {
+                    for (int m = 0; m < testPath.length; m++) {
+                       for (int n = 0; n < testUrlPathOptions.length; n++) {
+
+
+                           ResultPair schemePair = testUrlScheme[i];
+                           ResultPair authorityPair = testUrlAuthority[j];
+                           ResultPair pathPair = testPath[m];
+                           ResultPair pathOptionPair = testUrlPathOptions[n];
+
+                   
+                           thisString = schemePair.item;
+                           thisString += authorityPair.item;
+                           thisString += pathPair.item;
+                           thisString += pathOptionPair.item;
+
+                           expected = (schemePair.valid && authorityPair.valid && pathPair.valid && pathOptionPair.valid);
+                   
+                           //if(!(result = urlVal.isValid(thisString)))
+                            System.out.println(String.format("%-100s", thisString) + "Expected: " + expected + "\tActual: " + result);
+                       
+                           assertEquals(thisString, expected, result);
+                       }
+                   }
+           }
+       }
    }
    
    public void testAnyOtherUnitTest()

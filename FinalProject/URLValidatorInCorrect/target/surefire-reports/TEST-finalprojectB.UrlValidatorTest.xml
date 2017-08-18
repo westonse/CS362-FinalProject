@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="3" name="finalprojectB.UrlValidatorTest" time="0.217" errors="0" skipped="0">
+<testsuite tests="5" failures="4" name="finalprojectB.UrlValidatorTest" time="0.187" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib"/>
@@ -64,7 +64,7 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="finalprojectB.UrlValidatorTest" name="testManualTest" time="0.024">
+  <testcase classname="finalprojectB.UrlValidatorTest" name="testManualTest" time="0.017">
     <failure message="ERROR: http://www.google.com:80/test1/test1?action=view is VALID, but returned FALSE" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: ERROR: http://www.google.com:80/test1/test1?action=view is VALID, but returned FALSE
 	at junit.framework.Assert.fail(Assert.java:57)
 	at junit.framework.Assert.assertTrue(Assert.java:22)
@@ -101,14 +101,14 @@
 </system-out>
   </testcase>
   <testcase classname="finalprojectB.UrlValidatorTest" name="testAnyOtherUnitTest" time="0"/>
-  <testcase classname="finalprojectB.UrlValidatorTest" name="testYourSecondPartition" time="0.002">
-    <failure message="http://www.google.com/first=Main&amp;action=view expected:&lt;true&gt; but was:&lt;false&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: http://www.google.com/first=Main&amp;action=view expected:&lt;true&gt; but was:&lt;false&gt;
+  <testcase classname="finalprojectB.UrlValidatorTest" name="testYourSecondPartition" time="0.001">
+    <failure message="http://www.google.com/path?action=view expected:&lt;true&gt; but was:&lt;false&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: http://www.google.com/path?action=view expected:&lt;true&gt; but was:&lt;false&gt;
 	at junit.framework.Assert.fail(Assert.java:57)
 	at junit.framework.Assert.failNotEquals(Assert.java:329)
 	at junit.framework.Assert.assertEquals(Assert.java:78)
 	at junit.framework.Assert.assertEquals(Assert.java:174)
 	at junit.framework.TestCase.assertEquals(TestCase.java:333)
-	at finalprojectB.UrlValidatorTest.testYourSecondPartition(UrlValidatorTest.java:152)
+	at finalprojectB.UrlValidatorTest.testYourSecondPartition(UrlValidatorTest.java:146)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -137,10 +137,10 @@
 </failure>
     <system-out>BEGIN QUERY PARTITION TEST:
 
-http://www.google.com/path?first=Main&amp;action=view                                                   Expected: true	Actual: false
+http://www.google.com/path?action=view                                                              Expected: true	Actual: false
 </system-out>
   </testcase>
-  <testcase classname="finalprojectB.UrlValidatorTest" name="testYourFirstPartition" time="0.191">
+  <testcase classname="finalprojectB.UrlValidatorTest" name="testYourFirstPartition" time="0.168">
     <failure message="http://www.google.com:1000 expected:&lt;true&gt; but was:&lt;false&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: http://www.google.com:1000 expected:&lt;true&gt; but was:&lt;false&gt;
 	at junit.framework.Assert.fail(Assert.java:57)
 	at junit.framework.Assert.failNotEquals(Assert.java:329)
@@ -1195,5 +1195,43 @@ http://www.google.com:999                                                       
 http://www.google.com:1000                                                                          Expected: true	Actual: false
 </system-out>
   </testcase>
-  <testcase classname="finalprojectB.UrlValidatorTest" name="testIsValid" time="0"/>
+  <testcase classname="finalprojectB.UrlValidatorTest" name="testIsValid" time="0.001">
+    <failure message="http://www.google.com/test1/test1 expected:&lt;true&gt; but was:&lt;false&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: http://www.google.com/test1/test1 expected:&lt;true&gt; but was:&lt;false&gt;
+	at junit.framework.Assert.fail(Assert.java:57)
+	at junit.framework.Assert.failNotEquals(Assert.java:329)
+	at junit.framework.Assert.assertEquals(Assert.java:78)
+	at junit.framework.Assert.assertEquals(Assert.java:174)
+	at junit.framework.TestCase.assertEquals(TestCase.java:333)
+	at finalprojectB.UrlValidatorTest.testIsValid(UrlValidatorTest.java:252)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</failure>
+    <system-out>
+Unit test:
+http://www.google.com/test1/test1                                                                   Expected: true	Actual: false
+</system-out>
+  </testcase>
 </testsuite>
